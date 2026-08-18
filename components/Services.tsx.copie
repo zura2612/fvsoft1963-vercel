@@ -1,3 +1,4 @@
+// components/Services.tsx
 "use client";
 
 import Link from "next/link";
@@ -17,46 +18,15 @@ interface Service {
 }
 
 // ==========================================
-// 2. CONSTANTES DE COULEURS & ANIMATIONS AURORA
+// 2. CONSTANTES DE COULEURS ET DONNÉES EN DUR
 // ==========================================
 
 const AURORA_COLORS = {
-  indigo: "#818cf8",    // Indigo
-  turquoise: "#2dd4bf", // Turquoise
-  rose: "#f472b6",      // Rose
-  ambre: "#fbbf24",     // Ambre
+  indigo: "#818cf8",
+  turquoise: "#2dd4bf",
+  rose: "#f472b6",
+  ambre: "#fbbf24",
 } as const;
-
-// Animations des blobs Aurora gérées en JS via Framer Motion (bypass le compilateur CSS de Vercel)
-const auroraBlobVariants = {
-  blob1: {
-    x: [0, "25vw", "-15vw", 0],
-    y: [0, "20vh", "25vh", 0],
-    scale: [1, 1.3, 0.75, 1],
-    transition: { duration: 16, repeat: Infinity, ease: "easeInOut" },
-  },
-  blob2: {
-    x: [0, "-22vw", 0],
-    y: [0, "-18vh", 0],
-    scale: [1, 1.35, 1],
-    transition: { duration: 18, repeat: Infinity, ease: "easeInOut" },
-  },
-  blob3: {
-    x: [0, "-18vw", "14vw", 0],
-    y: [0, "15vh", "-12vh", 0],
-    scale: [1, 0.7, 1.25, 1],
-    transition: { duration: 14, repeat: Infinity, ease: "easeInOut" },
-  },
-  blob4: {
-    x: [0, "20vw", 0],
-    y: [0, "-18vh", 0],
-    scale: [1, 1.4, 1],
-    transition: { duration: 15, repeat: Infinity, ease: "easeInOut" },
-  },
-};
-
-const GRAIN_DATA_URI =
-  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E";
 
 const services: Service[] = [
   {
@@ -86,103 +56,115 @@ const services: Service[] = [
 ];
 
 // ==========================================
-// 3. VARIANTES FRAMER MOTION (CONTENU)
+// 3. VARIANTES FRAMER MOTION TYPÉES
 // ==========================================
 
+/** Animation de l'en-tête de section */
 const headerVariants: Variants = {
-  hidden: { opacity: 0, y: -20 },
+  hidden: { 
+    opacity: 0, 
+    y: -20, // décalage vers le haut de 20 px 
+  },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+    transition: {
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1], // Custom cubic-bezier pour un arrêt fluide
+    },
   },
 };
 
+/** Animation du conteneur parent (staggering) */
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
   },
 };
 
+/** Animation individuelle des cartes enfant */
 const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 20, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
+  hidden: { 
+    opacity: 0, 
+    y: 20,
+    scale: 0.95, 
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
     scale: 1,
-    transition: { duration: 0.5, ease: "easeOut" },
+    transition: { 
+      duration: 0.5,
+      ease: "easeOut",
+    } 
   },
 };
 
+/* pour le fond aurora */
+const style1 = "absolute rounded-full blur-[60px] dark:mix-blend-screen opacity-70 dark:opacity-60 will-change-transform";
 // ==========================================
 // 4. COMPOSANT PRINCIPAL
 // ==========================================
 
 export default function Services() {
   return (
-    <section className="relative overflow-hidden py-6 rounded-2xl bg-white dark:bg-[#0b0d17] border border-gray-200 dark:border-gray-800 transition-colors duration-300">
+    /* <section className="py-6 rounded-2xl bg-white dark:bg-black border border-black"> */
+    <section className="relative overflow-hidden py-6 rounded-2xl bg-white dark:bg-[#0b0d17] border border-black dark:border-white transition-colors duration-300">
       
-      {/* Arrière-plan Aurora animé via Framer Motion */}
+      {/* Arrière-plan Aurora + Texture Grain */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        {/* Blob Indigo */}
-        <motion.div
-          animate={auroraBlobVariants.blob1}
-          className="absolute rounded-full blur-[60px] dark:mix-blend-screen opacity-70 dark:opacity-60 w-[55vmax] h-[55vmax] -top-[15%] -left-[10%]"
-          style={{
-            background: `radial-gradient(circle at 30% 30%, ${AURORA_COLORS.indigo}, transparent 70%)`,
-          }}
-        />
-        {/* Blob Turquoise */}
-        <motion.div
-          animate={auroraBlobVariants.blob2}
-          className="absolute rounded-full blur-[60px] dark:mix-blend-screen opacity-70 dark:opacity-60 w-[45vmax] h-[45vmax] -bottom-[10%] -right-[5%]"
-          style={{
-            background: `radial-gradient(circle at 60% 40%, ${AURORA_COLORS.turquoise}, transparent 70%)`,
-          }}
-        />
-        {/* Blob Rose */}
-        <motion.div
-          animate={auroraBlobVariants.blob3}
-          className="absolute rounded-full blur-[60px] dark:mix-blend-screen opacity-70 dark:opacity-60 w-[38vmax] h-[38vmax] top-[30%] right-[10%]"
-          style={{
-            background: `radial-gradient(circle at 50% 50%, ${AURORA_COLORS.rose}, transparent 70%)`,
-          }}
-        />
-        {/* Blob Ambre */}
-        <motion.div
-          animate={auroraBlobVariants.blob4}
-          className="absolute rounded-full blur-[60px] dark:mix-blend-screen opacity-70 dark:opacity-60 w-[30vmax] h-[30vmax] bottom-[15%] left-[20%]"
-          style={{
-            background: `radial-gradient(circle at 50% 50%, ${AURORA_COLORS.ambre}, transparent 70%)`,
-          }}
-        />
-
-        {/* Texture de Grain Inline */}
         <div
-          className="absolute inset-0 opacity-[0.05] dark:opacity-[0.035] pointer-events-none"
-          style={{ backgroundImage: `url("${GRAIN_DATA_URI}")` }}
+          className={`${style1} w-[55vmax] h-[55vmax] -top-[15%] -left-[10%] animate-aurora-1`}
+          style={{
+            background: "radial-gradient(circle at 30% 30%, ${AURORA_COLORS.indigo}, transparent 70%)",
+          }}
         />
+        <div
+          className={`${style1} w-[45vmax] h-[45vmax] -bottom-[10%] -right-[5%] animate-aurora-2`}
+          style={{
+            background: "radial-gradient(circle at 60% 40%, ${AURORA_COLORS.turquoise}, transparent 70%)",
+          }}
+        />
+        <div
+          className={`${style1}  w-[38vmax] h-[38vmax] top-[30%] right-[10%] animate-aurora-3`}
+          style={{
+            background: "radial-gradient(circle at 50% 50%, ${AURORA_COLORS.rose}, transparent 70%)",
+          }}
+        />
+        <div
+          className={`${style1}  w-[30vmax] h-[30vmax] bottom-[15%] left-[20%] animate-aurora-4`}
+          style={{
+            background: "radial-gradient(circle at 50% 50%, ${AURORA_COLORS.ambre}, transparent 70%)",
+          }}
+        />
+        <div className="absolute inset-0 opacity-[0.05] dark:opacity-[0.035] pointer-events-none bg-aurora-grain" />
       </div>
-
-      {/* Contenu UI */}
+      
+      {/*<div className="container mx-auto px-4 sm:px-6">*/}
+      {/* contenu UI de la section */}
       <div className="container relative z-10 mx-auto px-4 sm:px-6">
+        {/* En-tête de section */}
         <motion.div
           variants={headerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, margin: '-50px' }}
           className="max-w-2xl mx-auto text-center mb-8 md:mb-12"
         >
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-4">
             Nos Services & Prestations
           </h2>
-          <p className="text-sm sm:text-base font-bold text-blue-600 dark:text-blue-400">
+          <p className="text-sm sm:text-base font-bold text-blue-600 dark:text-white">
             Des solutions logicielles adaptées aux exigences modernes du web et du Cloud.
           </p>
         </motion.div>
 
+        {/* Grille des 3 cartes animées */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -196,21 +178,21 @@ export default function Services() {
 
             return (
               <motion.div
-                key={service.id}
-                variants={cardVariants}
-                className="h-full"
+                key={service.id} variants={cardVariants} className="h-full"
                 transition={{ duration: 0.2 }}
-                whileHover={{ y: -10 }}
+		whileHover={{ y: -10 }} //remontée verticale de 10px
               >
                 <Link
                   href={targetUrl}
-                  className="group relative flex flex-col justify-between h-full p-6 sm:p-8 rounded-2xl bg-white/85 dark:bg-gray-900/85 backdrop-blur-sm border border-gray-200 dark:border-gray-800 hover:border-blue-500/50 dark:hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300"
+                  className="group relative flex flex-col justify-between h-full p-6 sm:p-8 rounded-2xl bg-white dark:bg-gray-900 border border-black dark:border-white hover:border-blue-500/50 dark:hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300"
                 >
                   <div>
+                    {/* Icône du service */}
                     <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-950/50 border border-blue-100 dark:border-blue-900/50 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-6 group-hover:scale-110 transition-transform duration-300">
                       <Icon size={24} />
                     </div>
 
+                    {/* Titre & Description */}
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                       {service.title}
                     </h3>
@@ -219,6 +201,7 @@ export default function Services() {
                     </p>
                   </div>
 
+                  {/* Badges de technologies + CTA */}
                   <div className="pt-6 border-t border-gray-100 dark:border-gray-800/80">
                     <div className="flex flex-wrap gap-1.5 mb-6">
                       {service.technologies.map((tech) => (
@@ -241,6 +224,7 @@ export default function Services() {
             );
           })}
         </motion.div>
+
       </div>
     </section>
   );
