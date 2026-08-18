@@ -8,10 +8,6 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendContactEmail(data: ContactFormData) {
   const emailTo = process.env.CONTACT_EMAIL_TO;
-/*if (!emailTo) {
-  throw new Error("action.ts: CONTACT_EMAIL_TO n'est pas définie dans l'environnement.");
-  //return { success: false, error: "action.ts: Configuration email manquante." }; return interdit ici
-}*/
 
   // 1. Validation Runtime + Narrowing TypeScript automatique
   if (!emailTo) {

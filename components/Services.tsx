@@ -1,4 +1,4 @@
-// components/Services_v0.tsx
+// components/Services.tsx
 "use client";
 
 import Link from "next/link";
@@ -18,8 +18,15 @@ interface Service {
 }
 
 // ==========================================
-// 2. DONNÉES EN DUR
+// 2. CONSTANTES DE COULEURS ET DONNÉES EN DUR
 // ==========================================
+
+const AURORA_COLORS = {
+  indigo: "#818cf8",
+  turquoise: "#2dd4bf",
+  rose: "#f472b6",
+  ambre: "#fbbf24",
+} as const;
 
 const services: Service[] = [
   {
@@ -98,15 +105,49 @@ const cardVariants: Variants = {
   },
 };
 
+/* pour le fond aurora */
+const style1 = "absolute rounded-full blur-[60px] dark:mix-blend-screen opacity-70 dark:opacity-60 will-change-transform";
 // ==========================================
 // 4. COMPOSANT PRINCIPAL
 // ==========================================
 
 export default function Services() {
   return (
-    <section className="py-6 rounded-2xl bg-white dark:bg-black border border-black">
-      <div className="container mx-auto px-4 sm:px-6">
-        
+    /* <section className="py-6 rounded-2xl bg-white dark:bg-black border border-black"> */
+    <section className="relative overflow-hidden py-6 rounded-2xl bg-white dark:bg-[#0b0d17] border border-black dark:border-white transition-colors duration-300">
+      
+      {/* Arrière-plan Aurora + Texture Grain */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <div
+          className={`${style1} w-[55vmax] h-[55vmax] -top-[15%] -left-[10%] animate-aurora-1`}
+          style={{
+            background: "radial-gradient(circle at 30% 30%, ${AURORA_COLORS.indigo}, transparent 70%)",
+          }}
+        />
+        <div
+          className={`${style1} w-[45vmax] h-[45vmax] -bottom-[10%] -right-[5%] animate-aurora-2`}
+          style={{
+            background: "radial-gradient(circle at 60% 40%, ${AURORA_COLORS.turquoise}, transparent 70%)",
+          }}
+        />
+        <div
+          className={`${style1}  w-[38vmax] h-[38vmax] top-[30%] right-[10%] animate-aurora-3`}
+          style={{
+            background: "radial-gradient(circle at 50% 50%, ${AURORA_COLORS.rose}, transparent 70%)",
+          }}
+        />
+        <div
+          className={`${style1}  w-[30vmax] h-[30vmax] bottom-[15%] left-[20%] animate-aurora-4`}
+          style={{
+            background: "radial-gradient(circle at 50% 50%, ${AURORA_COLORS.ambre}, transparent 70%)",
+          }}
+        />
+        <div className="absolute inset-0 opacity-[0.05] dark:opacity-[0.035] pointer-events-none bg-aurora-grain" />
+      </div>
+      
+      {/*<div className="container mx-auto px-4 sm:px-6">*/}
+      {/* contenu UI de la section */}
+      <div className="container relative z-10 mx-auto px-4 sm:px-6">
         {/* En-tête de section */}
         <motion.div
           variants={headerVariants}
@@ -143,7 +184,7 @@ export default function Services() {
               >
                 <Link
                   href={targetUrl}
-                  className="group relative flex flex-col justify-between h-full p-6 sm:p-8 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-blue-500/50 dark:hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300"
+                  className="group relative flex flex-col justify-between h-full p-6 sm:p-8 rounded-2xl bg-white dark:bg-gray-900 border border-black dark:border-white hover:border-blue-500/50 dark:hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300"
                 >
                   <div>
                     {/* Icône du service */}

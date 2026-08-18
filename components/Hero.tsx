@@ -31,7 +31,7 @@ const boutonClassName = "inline-flex items-center justify-center gap-2 px-6 py-3
 export default function Hero({ className = "" }: HeroProps) {
   return (
     <section
-      className={`relative w-full min-h-[80vh] flex flex-col items-center justify-center text-center overflow-hidden py-4 md:py-8 rounded-2xl ${className}`}
+      className={`relative w-full min-h-[80vh] flex flex-col border border-black dark:border-white items-center justify-center text-center overflow-hidden py-4 md:py-8 rounded-2xl ${className}`}
     >
       {/* 1. ARRIÈRE-PLAN : Image WebP */}
       <Image
