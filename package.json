@@ -1,0 +1,38 @@
+{
+	"name": "fvsoft1963",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"maintenance:toggle": "node scripts/toggle-maintenance.mjs"
+	},
+	"dependencies": {
+		"@hookform/resolvers": "^5.8.0",
+		"framer-motion": "^13.0.0",
+		"gray-matter": "^4.0.3",
+		"lucide-react": "^1.30.0",
+		"next": "16.2.11",
+		"next-mdx-remote": "^6.0.0",
+		"next-themes": "^0.4.6",
+		"react": "^19.1.7",
+		"react-dom": "^19.1.7",
+		"react-hook-form": "^7.85.0",
+		"resend": "^6.18.1",
+		"sonner": "^2.0.8",
+		"zod": "^4.4.3"
+	},
+	"devDependencies": {
+		"@eslint/eslintrc": "^3",
+		"@tailwindcss/postcss": "^4",
+		"@types/node": "^20.19.43",
+		"@types/react": "^19.1.7",
+		"@types/react-dom": "^19.1.7",
+		"eslint": "^9",
+		"eslint-config-next": "16.2.11",
+		"tailwindcss": "^4",
+		"typescript": "^5.7.4"
+		}
+}
