@@ -276,8 +276,8 @@ export default function RealisationsPage() {
             })}
           </div>
 
-          <div className="mt-2 text-xs text-slate-400 dark:text-slate-500 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-indigo-500 animate-ping" />
+          <div className="mt-2 text-xs text-black dark:text-white flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
             Survolez pour figer • Cliquez sur un projet pour le ramener au premier plan
           </div>
         </section>
