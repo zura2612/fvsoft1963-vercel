@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { motion, Variants } from "framer-motion";
+// MODIFICATION 1: Import de TargetAndTransition pour typer strictement les objets d'animation Framer Motion 13
+import { motion, Variants, TargetAndTransition } from "framer-motion";
 import { Code2, Cpu, Gauge, ArrowRight } from "lucide-react";
 
 // ==========================================
@@ -20,6 +21,7 @@ interface Service {
 // 2. CONSTANTES DE COULEURS & ANIMATIONS AURORA
 // ==========================================
 
+// MODIFICATION 2: Constante des couleurs Aurora nommées en français (Hexadécimaux Tailwind 400)
 const AURORA_COLORS = {
   indigo: "#818cf8",    // Indigo
   turquoise: "#2dd4bf", // Turquoise
@@ -27,8 +29,9 @@ const AURORA_COLORS = {
   ambre: "#fbbf24",     // Ambre
 } as const;
 
-// Animations des blobs Aurora gérées en JS via Framer Motion (bypass le compilateur CSS de Vercel)
-const auroraBlobVariants = {
+// MODIFICATION 3: Animation des 4 blobs gérée directement en JS/Framer Motion (bypass la purge CSS Vercel).
+// Utilisation du type Record<string, TargetAndTransition> pour valider "easeInOut" auprès du type-checker TS de Framer Motion 13.
+const auroraBlobVariants: Record<string, TargetAndTransition> = {
   blob1: {
     x: [0, "25vw", "-15vw", 0],
     y: [0, "20vh", "25vh", 0],
@@ -55,6 +58,7 @@ const auroraBlobVariants = {
   },
 };
 
+// MODIFICATION 4: Bruit SVG encodé en Data URI inline pour annuler toute dépendance envers globals.css
 const GRAIN_DATA_URI =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E";
 
@@ -122,9 +126,10 @@ const cardVariants: Variants = {
 
 export default function Services() {
   return (
+    // MODIFICATION 5: Fond blanc pur (bg-white) en mode clair pour maximiser le contraste visuel de l'Aurora
     <section className="relative overflow-hidden py-6 rounded-2xl bg-white dark:bg-[#0b0d17] border border-gray-200 dark:border-gray-800 transition-colors duration-300">
       
-      {/* Arrière-plan Aurora animé via Framer Motion */}
+      {/* MODIFICATION 6: Arrière-plan Aurora animé à 100% via Framer Motion */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         {/* Blob Indigo */}
         <motion.div
@@ -202,6 +207,7 @@ export default function Services() {
                 transition={{ duration: 0.2 }}
                 whileHover={{ y: -10 }}
               >
+                {/* MODIFICATION 7: Arrière-plan des cartes en transparence légère (bg-white/85 & dark:bg-gray-900/85 + backdrop-blur-sm) pour laisser passer le fond lumineux */}
                 <Link
                   href={targetUrl}
                   className="group relative flex flex-col justify-between h-full p-6 sm:p-8 rounded-2xl bg-white/85 dark:bg-gray-900/85 backdrop-blur-sm border border-gray-200 dark:border-gray-800 hover:border-blue-500/50 dark:hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300"
