@@ -5,39 +5,45 @@ import { Resend } from "resend";
 import { contactSchema, ContactFormData } from "@/lib/schemas/contact";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const emailTo = process.env.CONTACT_EMAIL_TO;
-if (!emailTo) {
-  throw new Error("action.ts: CONTACT_EMAIL_TO n'est pas définie dans l'environnement.");
-  //return { success: false, error: "action.ts: Configuration email manquante." }; return interdit ici
-}
 
 export async function sendContactEmail(data: ContactFormData) {
-  // 1. Validation robuste côté serveur
-  const result = contactSchema.safeParse(data);
+  const emailTo = process.env.CONTACT_EMAIL_TO;
+/*if (!emailTo) {
+  throw new Error("action.ts: CONTACT_EMAIL_TO n'est pas définie dans l'environnement.");
+  //return { success: false, error: "action.ts: Configuration email manquante." }; return interdit ici
+}*/
 
+  // 1. Validation Runtime + Narrowing TypeScript automatique
+  if (!emailTo) {
+    console.error("action.ts ERREUR: La variable d'environnement CONTACT_EMAIL_TO n'est pas définie.");
+    return { success: false, error: "Configuration serveur incomplète: CONTACT_EMAIL_TO inconnu" };
+  }
+
+  // 2. Validation robuste côté serveur
+  const result = contactSchema.safeParse(data);
   if (!result.success) {
     return { success: false, error: "Données de formulaire invalides." };
   }
 
   const { nom, prenom, email, telephone, sujet, message, website } = result.data;
 
-  // 2. Traitement Anti-Spam Honeypot
+  // 3. Traitement Anti-Spam Honeypot
   if (website && website.length > 0) {
     // Faux succès pour leurrer les bots sans consommer de quota Resend
     return { success: true };
   }
 
-  // 3. Envoi via l'API Resend
+  // 4. Envoi via l'API Resend
   try {
     const { error } = await resend.emails.send({
-      from: "Formulaire Contact <contact@notifications.fvsoft1963.com>", // Remplace par ton domaine vérifié en prod
-      //to: [emailTo], pose problème avec next build
-      to: [emailTo!],
+      from: "FVSOFT1963 Contact <contact@notifications.fvsoft1963.com>", // Remplace par ton domaine vérifié en prod
+      //to: [emailTo], pose problème avec next build?
+      to: [emailTo],
       replyTo: email,
-      subject: `[Contact] ${sujet}`,
+      subject: `[Contact FVSOFT1963] ${sujet}`,
       html: `
         <div style="font-family: sans-serif; padding: 20px; color: #333;">
-          <h2>Nouveau message de contact</h2>
+          <h2>Message de contact</h2>
           <p><strong>Expéditeur :</strong> ${prenom} ${nom}</p>
           <p><strong>E-mail :</strong> <a href="mailto:${email}">${email}</a></p>
           <p><strong>Téléphone :</strong> ${telephone || "Non renseigné"}</p>
