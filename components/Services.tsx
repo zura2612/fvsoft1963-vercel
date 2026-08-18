@@ -127,7 +127,7 @@ const cardVariants: Variants = {
 export default function Services() {
   return (
     // MODIFICATION 5: Fond blanc pur (bg-white) en mode clair pour maximiser le contraste visuel de l'Aurora
-    <section className="relative overflow-hidden py-6 rounded-2xl bg-white dark:bg-[#0b0d17] border border-gray-200 dark:border-gray-800 transition-colors duration-300">
+    <section className="relative overflow-hidden py-6 rounded-2xl bg-white dark:bg-[#0b0d17] border border-black dark:border-white transition-colors duration-300">
       
       {/* MODIFICATION 6: Arrière-plan Aurora animé à 100% via Framer Motion */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
