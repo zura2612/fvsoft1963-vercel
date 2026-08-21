@@ -4,9 +4,9 @@ import type { Metadata } from "next";
 import { Toaster } from "sonner";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import JsonLd from "@/seo/JsonLd";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import JsonLd from "@/components/seo/json-ld";
 
 //const inter = Inter({ subsets: ["latin"] });
 const inter = { className: 'font-sans' }; // Utilise la font système
@@ -57,7 +57,7 @@ export default function RootLayout({
           <Footer />
 
           {/* Intégration globale des Toasts (Sonner) */}
-          <Toaster position="top-right" richColors closeButton />
+          <Toaster position="top-right" duration={5000} richColors closeButton />
         </ThemeProvider>
       </body>
     </html>

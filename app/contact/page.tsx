@@ -1,6 +1,6 @@
 // app/contact/page.tsx
 import { Suspense } from "react";
-import ContactForm from "./ContactForm";
+import ContactForm from "./contact-form";
 
 export default function ContactPage() {
   return (
@@ -17,7 +17,7 @@ export default function ContactPage() {
       </div>
 
       <Suspense fallback={<div className="text-center py-10">Chargement du formulaire...</div>}>
-        <ContactForm />
+        <ContactForm /> {/* utilise useSearchParams() => enveloppé par Suspense */}
       </Suspense>
     </main>
   );

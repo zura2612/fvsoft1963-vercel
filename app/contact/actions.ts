@@ -33,7 +33,7 @@ export async function sendContactEmail(data: ContactFormData) {
   try {
     const { error } = await resend.emails.send({
       from: "FVSOFT1963 Contact <contact@notifications.fvsoft1963.com>", // Remplace par ton domaine vérifié en prod
-      //to: [emailTo], pose problème avec next build?
+      //to: [emailTo], pose problème avec next build? NON!
       to: [emailTo],
       replyTo: email,
       subject: `[Contact FVSOFT1963] ${sujet}`,
@@ -52,12 +52,17 @@ export async function sendContactEmail(data: ContactFormData) {
     });
 
     if (error) {
-      return { success: false, error: error.message };
+      console.error("action.ts Erreur Resend :", error);
+      const isNetworkError = error.statusCode === null || error.name === "application_error"; // selon Resend API Error avec statusCode = null path: /emails
+      return {
+        success: false,
+        error: isNetworkError ? "Connexion au service d'envoi Resend impossible. Vérifiez votre connection internet." : "Impossible d'envoyer votre message pour le moment.",
+      };
     }
 
     return { success: true };
   } catch (err) {
-    console.error("Erreur Resend :", err);
-    return { success: false, error: "Impossible d'envoyer le message pour le moment." };
+    console.error("action.ts/catch Erreur Resend inattendue:", err);
+    return { success: false, error: "Erreur inconnue. Impossible d'envoyer votre message pour le moment." };
   }
 }

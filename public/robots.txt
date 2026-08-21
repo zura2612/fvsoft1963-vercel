@@ -1,0 +1,6 @@
+# fvsoft1963/public/robots.txt
+User-agent: *
+Allow: /
+Disallow:
+
+Sitemap: https://fvsoft1963.com

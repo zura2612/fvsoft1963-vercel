@@ -1,4 +1,4 @@
-// components/Hero.tsx
+// components/hero.tsx
 "use client";
 
 //import React from "react";

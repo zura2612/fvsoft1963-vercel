@@ -1,4 +1,4 @@
-// data/realisations.ts
+// lib/data/realisations.ts
 
 export interface RealisationImage {
   url: string;     // Chemin de l'asset WebP / PNG

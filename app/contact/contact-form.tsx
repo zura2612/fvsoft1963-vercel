@@ -1,13 +1,14 @@
-// app/contact/ContactForm.tsx
+// app/contact/contact-form.tsx
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react"; // useRef pour capturer le noeud DOM du bouton de soumission
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { contactSchema, ContactFormData } from "@/lib/schemas/contact";
 import { sendContactEmail } from "./actions";
+import confetti from "canvas-confetti";
 
 const styleLabel = "block text-sm text-black dark:text-white font-medium mb-2";
 const styleInput = "w-full px-4 py-2.5 text-black dark:text-white rounded-xl border border-black dark:border-white bg-white dark:bg-slate-900 focus:ring-2 focus:ring-indigo-500 outline-none";
@@ -17,6 +18,8 @@ const styleButton = "w-full py-3 px-6 rounded-xl text-white bg-indigo-600 hover:
 export default function ContactForm() {
   const searchParams = useSearchParams();
   const subjectParam = searchParams.get("subject");
+  // Création de la ref rattachée au bouton de soumission
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const {
     register,
@@ -50,9 +53,36 @@ export default function ContactForm() {
 
     if (res.success) {
       toast.success("Votre message a bien été envoyé !");
+      // code pour l'animation confetti
+      // Calcul dynamique du centre du bouton en valeurs relatives (0 à 1)
+      let originX = 0.5;
+      let originY = 0.5;
+      if (buttonRef.current) {
+        const rect = buttonRef.current.getBoundingClientRect();
+        // X = (gauche du bouton + moitié de sa largeur) / largeur totale du viewport
+        originX = (rect.left + rect.width / 2) / window.innerWidth;
+        // Y = (haut du bouton + moitié de sa hauteur) / hauteur totale du viewport
+        originY = (rect.top + rect.height / 2) / window.innerHeight;
+      }
+      
+      confetti({
+        particleCount: 200, // Nombre de confettis
+        spread: 90, // Angle de l'explosion
+        origin: { x: originX , y: originY }, // Positions sur l'écran exprimées en proportion de sa hauteur et largeur
+        colors: [
+          "#4f46e5", // Indigo principal (équivalent au bg-indigo-600 de Tailwind)
+          "#818cf8", // Indigo plus clair pour le contraste
+          "#312e81", // Indigo foncé
+          "#ef4444", // Rouge vif
+          "#dc2626", // Rouge foncé
+          "#eab308", // Jaune
+          "#facc15", // Jaune lumineux
+          "#ffffff", // Blanc pour apporter de la luminosité
+        ],
+      });
       reset();
     } else {
-      toast.error(res.error || "Une erreur est survenue lors de l'envoi.");
+      toast.error(res.error || "Une erreur est survenue lors de l'envoi.", { duration: 10000 });
     }
   };
 
@@ -132,7 +162,9 @@ export default function ContactForm() {
       </div>
 
       {/* Bouton de soumission */}
+      {/* Liaison de buttonRef au composant HTML via l'attribut ref */}
       <button
+        ref={buttonRef}
         type="submit"
         disabled={isSubmitting}
         className={styleButton}

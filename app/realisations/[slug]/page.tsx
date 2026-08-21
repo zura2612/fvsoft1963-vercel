@@ -1,7 +1,7 @@
 // app/realisations/[slug]/page.tsx
 import { notFound } from "next/navigation";
-import { REALISATIONS } from "../../../data/realisations";
-import RealisationDetailClient from "./RealisationDetailClient";
+import { REALISATIONS } from "../../../lib/data/realisations";
+import RealisationDetailClient from "./realisation-detail-client";
 
 // Génération des routes statiques pour le build (SEO & performances optimales)
 export async function generateStaticParams() {

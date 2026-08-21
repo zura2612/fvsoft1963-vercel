@@ -1,4 +1,4 @@
-// components/Footer.tsx
+// components/footer.tsx
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Mail, MapPin } from "lucide-react";

@@ -1,4 +1,4 @@
-// components/Header.tsx
+// components/header.tsx
 "use client";
 
 import Link from "next/link";
@@ -6,7 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { ThemeToggle } from "./ThemeToggle";
+import { ThemeToggle } from "./theme-toggle";
 import { Menu, X } from "lucide-react";
 import { siteConfig } from "@/config/site";
 

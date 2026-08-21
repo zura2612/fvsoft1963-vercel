@@ -1,3 +1,4 @@
+// components/services.tsx
 "use client";
 
 import Link from "next/link";
@@ -23,10 +24,10 @@ interface Service {
 
 // MODIFICATION 2: Constante des couleurs Aurora nommées en français (Hexadécimaux Tailwind 400)
 const AURORA_COLORS = {
-  indigo: "#818cf8",    // Indigo
-  turquoise: "#2dd4bf", // Turquoise
-  rose: "#f472b6",      // Rose
-  ambre: "#fbbf24",     // Ambre
+  indigo: "#818cf8",
+  turquoise: "#2dd4bf",
+  rose: "#f472b6",
+  ambre: "#fbbf24",
 } as const;
 
 // MODIFICATION 3: Animation des 4 blobs gérée directement en JS/Framer Motion (bypass la purge CSS Vercel).
@@ -210,7 +211,7 @@ export default function Services() {
                 {/* MODIFICATION 7: Arrière-plan des cartes en transparence légère (bg-white/85 & dark:bg-gray-900/85 + backdrop-blur-sm) pour laisser passer le fond lumineux */}
                 <Link
                   href={targetUrl}
-                  className="group relative flex flex-col justify-between h-full p-6 sm:p-8 rounded-2xl bg-white/85 dark:bg-gray-900/85 backdrop-blur-sm border border-black dark:border-white hover:border-blue-500 dark:hover:border-blue-200 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300"
+                  className="group relative flex flex-col justify-between h-full p-6 sm:p-8 rounded-2xl bg-white/85 dark:bg-gray-900/85 backdrop-blur-sm border-2 border-black dark:border-white hover:border-blue-500 dark:hover:border-blue-200 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300"
                 >
                   <div>
                     <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-950/50 border border-black dark:border-white flex items-center justify-center text-blue-600 dark:text-blue-400 mb-6 group-hover:scale-110 transition-transform duration-300">
