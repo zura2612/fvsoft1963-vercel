@@ -123,5 +123,3 @@ export default function Hero({ className = "" }: HeroProps) {
     </section>
   );
 };
-
-//export default Hero;

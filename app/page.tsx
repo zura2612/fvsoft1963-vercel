@@ -1,5 +1,5 @@
 // app/page.tsx
-
+import TechMarquee from "@/components/tech-marquee";
 import Hero from "@/components/hero";
 import Services from "@/components/services";
 import ChatBot from "@/components/chat-bot";
@@ -7,6 +7,8 @@ import ChatBot from "@/components/chat-bot";
 export default function HomePage() {
   return (
     <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col gap-2 md:gap-4 bg-white dark:bg-black rounded-2xl">
+      {/* Section TechMarquee */}
+      <TechMarquee />
       {/* Section Hero */}
       <Hero />
       {/* Section Services */}
