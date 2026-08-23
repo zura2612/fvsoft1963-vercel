@@ -14,8 +14,8 @@ export const siteConfig = {
     location: "Lot-et-Garonne, France",
   },
   links: {
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
+    github: "https://github.com/zura2612",
+    linkedin: "https://linkedin.com/in/françois-vauchot-2781472b9",
   },
   skills: [
     "React / Next.js",

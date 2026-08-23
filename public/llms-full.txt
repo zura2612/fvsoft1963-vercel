@@ -1,0 +1,45 @@
+# fvsoft1963 — Documentation complète du domaine
+
+## 1. Profil & Expertise
+François Vauchot — Développeur Web Fullstack & Architecte Cloud.
+Spécialisé dans la création d'applications web modernes à haute performance et le déploiement sur les réseaux Edge.
+
+### Stack technique principale
+- **Frontend** : React, Next.js, TypeScript, Tailwind CSS, Framer Motion.
+- **Backend & Cloud** : Node.js, Cloudflare Workers, Cloudflare Pages, Hono, D1, KV.
+- **Outillage & Deploiement** : Git, pnpm, Vercel, Wrangler CLI.
+
+---
+
+## 2. Prestations détaillées
+
+### Développement Web sur mesure
+Conception d'applications web single-page (SPA) et de sites vitrines interactifs. Architecture moderne basée sur Next.js App Router, garantissant un rendu mixte (SSR/SSG) optimal pour le référencement naturel et les agents autonomes.
+
+### Architecture Serverless & Edge Cloudflare
+Déplacement de la logique métier au plus près des utilisateurs finaux grâce au réseau global Cloudflare. Déploiement d'APIs légères avec Hono sur Cloudflare Workers, stockage clé-valeur (KV) et bases de données relationnelles distribuées (D1).
+
+### Audit & Performance Web
+Optimisation poussée du temps de chargement pour maximiser les scores Core Web Vitals (LCP, INP, CLS). Analyse et découpage des bundles JavaScript, stratégies de cache HTTP agressives et mise en conformité de l'accessibilité.
+
+---
+
+## 3. Réalisations & Projets
+
+### site-vitrine-toilettage
+- **Description** : Site vitrine avec inscription, formulaire de contact et prise de rendez-vous.
+- **Technologies** : React19, Vite7, TypeScript, Tailwind CSS, TanStack, Cal.com, Workos.com.
+
+### gestion-bibliotheque
+- **Description** : Interface applicative réactive pour la gestion d'une bibliothèque avec tableaux de bord interactifs.
+- **Technologies** : React19, Express4, Sqlite, CRUD, Tailwind CSS, TypeScript, Vite.
+
+### boutique-bijoux
+- **Description** : Interface applicative pour la vente de bijoux en ligne avec gestion des stocks.
+- **Technologies** : React18, Express4, JWT, CORS, Sqlite, Vite, Zustand.
+
+---
+
+## 4. Informations de contact
+- **Site web** : https://fvsoft1963.com
+- **Formulaire de contact** : https://fvsoft1963.com/contact

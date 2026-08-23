@@ -1,6 +1,33 @@
 # fvsoft1963/public/robots.txt
 User-agent: *
 Allow: /
+# Autoriser explicitement les bots IA majeurs
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Googlebot
+Allow: /
+User-agent: Bingbot
+Allow: /
+User-agent: Bytespider
+Allow: /
+User-agent: CCBot
+Allow: /
+User-agent: DuckAssistBot
+Allow: /
+User-agent: PetalBot
+Allow: /
 Disallow:
 
-Sitemap: https://fvsoft1963.com
+Sitemap: https://fvsoft1963.com/sitemap.xml

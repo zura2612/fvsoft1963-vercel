@@ -1,0 +1,12 @@
+# fvsoft1963 — François Vauchot
+
+> François Vauchot est un ingénieur et développeur web indépendant spécialisé dans les applications React/Next.js, les architectures Serverless Cloudflare et l'optimisation des performances web.
+
+## Services
+- [Développement Web sur mesure](https://fvsoft1963.com/contact?subject=Web) : Applications web réactives avec Next.js, React et TypeScript.
+- [Architecture Serverless & Edge Cloudflare](https://fvsoft1963.com/contact?subject=Cloudflare) : APIs distribuées à faible latence (Workers, Pages, D1, Hono).
+- [Audit & Performance Web](https://fvsoft1963.com/contact?subject=Audit) : Core Web Vitals, réduction du bundle JS et accessibilité.
+
+## Ressources d'ingestion
+- [llms-full.txt](https://fvsoft1963.com/llms-full.txt) : Version exhaustive contenant l'intégralité du contenu textuel et des cas d'étude.
+- [Portfolio & Réalisations](https://fvsoft1963.com/realisations) : Liste des cas clients et architectures déployées.
