@@ -8,7 +8,7 @@ export const dynamic = "force-static";
 
 export default function RealisationsPage() {
   return (
-    <main className="py-10 border border-black dark:border-white rounded-2xl px-4 sm:px-6 mx-auto max-w-7xl bg-white dark:bg-black">
+    <section className="py-10 border border-black dark:border-white rounded-2xl px-4 sm:px-6 mx-auto max-w-7xl bg-blue-200 dark:bg-black">
       {/* 1. En-tête de la page */}
       <div className="text-center mb-16">
         <h1 className="text-2xl sm:text-4xl font-extrabold mb-4 tracking-tight">
@@ -98,6 +98,6 @@ export default function RealisationsPage() {
 
       {/* 3. Galerie orbitale chargée côté client uniquement */}
       <OrbitalGalleryLoader />
-    </main>
+    </section>
   );
 }

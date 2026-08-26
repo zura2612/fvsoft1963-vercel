@@ -14,6 +14,8 @@
 		"@ai-sdk/react": "^4.0.77",
 		"@hookform/resolvers": "^5.8.0",
 		"@modelcontextprotocol/sdk": "^1.30.0",
+		"@upstash/ratelimit": "^2.0.8",
+		"@upstash/redis": "^1.38.2",
 		"ai": "^7.0.74",
 		"canvas-confetti": "^1.9.4",
 		"framer-motion": "^13.0.0",

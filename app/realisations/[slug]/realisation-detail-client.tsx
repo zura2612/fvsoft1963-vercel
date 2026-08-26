@@ -36,8 +36,8 @@ export default function RealisationDetailClient({ realisation }: Props) {
 
   return (
     /* Enveloppe 100% largeur avec gestion dynamique du fond jour/nuit */
-    <div className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
-      <main className="py-6 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+    <section className="border border-black dark:border-white rounded-2xl mx-auto max-w-7xl bg-blue-200 dark:bg-black">
+      <div className="py-6 px-4 sm:px-6 lg:px-8">
         {/* Bouton retour */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -63,10 +63,10 @@ export default function RealisationDetailClient({ realisation }: Props) {
           transition={{ duration: 0.5 }}
           className="mb-12"
         >
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-4">
+          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-black dark:text-white mb-4">
             {realisation.title}
           </h1>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mb-6">
+          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mb-6">
             {realisation.shortDescription}
           </p>
 
@@ -235,7 +235,7 @@ export default function RealisationDetailClient({ realisation }: Props) {
             );
           })()}
         </AnimatePresence>
-      </main>
-    </div>
+      </div>
+    </section>
   );
 }

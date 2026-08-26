@@ -1,6 +1,5 @@
 // app/layout.tsx
 import type { Metadata } from "next";
-//import { Inter } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
@@ -8,7 +7,11 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import JsonLd from "@/components/seo/json-ld";
 
-//const inter = Inter({ subsets: ["latin"] });
+// MODIFICATION : Import du ChatProvider pour partager l'état d'ouverture du chatbot globalement
+import { ChatProvider } from "@/components/chat-context";
+// MODIFICATION : Import du composant ChatBot pour le rendre disponible sur toutes les pages du site
+import ChatBot from "@/components/chat-bot";
+
 const inter = { className: 'font-sans' }; // Utilise la font système
 
 export const metadata: Metadata = {
@@ -52,12 +55,20 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          <main className="flex-1 py-2 sm:py-4">{children}</main>
-          <Footer />
+          {/* MODIFICATION : Enveloppement de la structure principale avec ChatProvider pour que le Header et le ChatBot partagent le même état */}
+          <ChatProvider>
+            <Header />
+            
+            <main className="flex-1 py-2 sm:py-4">{children}</main>
+            
+            <Footer />
 
-          {/* Intégration globale des Toasts (Sonner) */}
-          <Toaster position="top-right" duration={5000} richColors closeButton />
+            {/* Intégration globale des Toasts (Sonner) */}
+            <Toaster position="top-right" duration={5000} richColors closeButton />
+            
+            {/* MODIFICATION : Rendu global du ChatBot en fin de body, flottant au-dessus de toutes les pages */}
+            <ChatBot />
+          </ChatProvider>
         </ThemeProvider>
       </body>
     </html>

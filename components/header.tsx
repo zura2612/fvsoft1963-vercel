@@ -10,6 +10,9 @@ import { ThemeToggle } from "./theme-toggle";
 import { Menu, X } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
+// MODIFICATION : Import du contexte pour contrôler l'ouverture du chatbot depuis le header
+import { useChatContext } from "./chat-context";
+
 const navLinks = [
   { name: "Accueil", href: "/" },
   { name: "Réalisations", href: "/realisations" },
@@ -19,6 +22,15 @@ const navLinks = [
 export default function Header() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+
+  // MODIFICATION : Récupération de la fonction setIsOpen du contexte du chat
+  const { setIsOpen: setChatOpen } = useChatContext();
+
+  // MODIFICATION : Fonction dédiée pour ouvrir le chat. 
+  // Si le chat est déjà ouvert, définir isOpen à true est un "no-op" pour React (rien ne se passe), respectant votre contrainte.
+  const handleOpenChat = () => {
+    setChatOpen(true);
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-black dark:border-white bg-white/80 dark:bg-black/80 backdrop-blur-md">
@@ -52,20 +64,28 @@ export default function Header() {
                 className={`relative text-sm font-medium transition-colors ${
                   isActive
                     ? "text-blue-600 dark:text-blue-400"
-                    : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                    : "text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
                 }`}
               >
                 {link.name}
-                {isActive && (
+              {/*  {isActive && (
                   <motion.div
                     layoutId="activeTab"
                     className="absolute -bottom-5.25 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
-                )}
+                )} */}
               </Link>
             );
           })}
+          
+          {/* MODIFICATION : Ajout du bouton "Aide" stylisé exactement comme les autres liens de navigation (texte uniquement) */}
+          <button
+            onClick={handleOpenChat}
+            className="relative text-sm font-medium transition-colors text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 focus:outline-none"
+          >
+            Aide
+          </button>
         </nav>
 
         {/* Actions (Thème + Menu Mobile) */}
@@ -95,6 +115,17 @@ export default function Header() {
               {link.name}
             </Link>
           ))}
+          
+          {/* MODIFICATION : Ajout du bouton "Aide" dans le menu mobile avec le même style, fermant le menu et ouvrant le chat */}
+          <button
+            onClick={() => {
+              setIsOpen(false);
+              handleOpenChat();
+            }}
+            className="block w-full text-left text-base font-medium text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none"
+          >
+            Aide
+          </button>
         </nav>
       )}
     </header>
