@@ -1,4 +1,4 @@
-// config/site.ts
+// config/site.ts où es utilisé skills?
 export const siteConfig = {
   name: "fvsoft1963",
   nom_entreprise: {

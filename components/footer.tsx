@@ -101,13 +101,13 @@ export default function Footer() {
         <div className="mt-4 pt-4 border-t border-black dark:border-white flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 dark:text-white gap-4">
           <p>© {currentYear} {siteConfig.name}. Tous droits réservés.</p>
           <div className="flex gap-2">
-            {/* remplacer Link par a parce qu'en production, cela pose problème */}
+            {/* remplacer Link par a parce qu'en production, next/link pose problème avec des ressources statiques */}
             <a href="/legal/mentions-legales-fr.pdf" target="_blank" rel="noopener noreferrer" className={`hover:underline ${styleHover}`}>
               Mentions Légales
             </a>
-            <Link href="/legal/politique-confidentialite-fr.pdf" target="_blank" rel="noopener noreferrer" className={`hover:underline ${styleHover}`}>
+            <a href="/legal/politique-confidentialite-fr.pdf" target="_blank" rel="noopener noreferrer" className={`hover:underline ${styleHover}`}>
               Confidentialité
-            </Link>
+            </a>
           </div>
         </div>
       </div>
