@@ -3,8 +3,12 @@
 
 import { Resend } from "resend";
 import { contactSchema, ContactFormData } from "@/lib/schemas/contact";
+import { siteConfig } from "@/config/site";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const nomSite = siteConfig.name; // fvsoft1963
+const nomSiteMaj = nomSite.toUpperCase(); // FVSOFT1963
+const urlSite = siteConfig.url; // https://fvsoft1963.com
 
 export async function sendContactEmail(data: ContactFormData) {
   const emailTo = process.env.CONTACT_EMAIL_TO;
@@ -32,14 +36,14 @@ export async function sendContactEmail(data: ContactFormData) {
   // 4. Envoi via l'API Resend
   try {
     const { error } = await resend.emails.send({
-      from: "FVSOFT1963 Contact <contact@notifications.fvsoft1963.com>", // Remplace par ton domaine vérifié en prod
+      from: `${nomSite}.com <contact@notifications.fvsoft1963.com>`, // Remplace par ton domaine vérifié en prod
       //to: [emailTo], pose problème avec next build? NON!
       to: [emailTo],
       replyTo: email,
-      subject: `[Contact FVSOFT1963] ${sujet}`,
+      subject: `[${nomSiteMaj} Contact] ${sujet}`,
       html: `
         <div style="font-family: sans-serif; padding: 20px; color: #333;">
-          <h2>Message de contact</h2>
+          <h2>Message de contact issu de ${urlSite}</h2>
           <p><strong>Expéditeur :</strong> ${prenom} ${nom}</p>
           <p><strong>E-mail :</strong> <a href="mailto:${email}">${email}</a></p>
           <p><strong>Téléphone :</strong> ${telephone || "Non renseigné"}</p>
@@ -56,7 +60,7 @@ export async function sendContactEmail(data: ContactFormData) {
       const isNetworkError = error.statusCode === null || error.name === "application_error"; // selon Resend API Error avec statusCode = null path: /emails
       return {
         success: false,
-        error: isNetworkError ? "Connexion au service d'envoi Resend impossible. Vérifiez votre connection internet." : "Impossible d'envoyer votre message pour le moment.",
+        error: isNetworkError ? "Connexion au service d'envoi Resend impossible. Vérifiez votre connexion internet." : "Impossible d'envoyer votre message pour le moment.",
       };
     }
 

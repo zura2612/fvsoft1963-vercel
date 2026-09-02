@@ -1,4 +1,4 @@
-// config/site.ts où es utilisé skills?
+// config/site.ts où es utilisé skills? json-ld.tsx et app/page.tsx !
 export const siteConfig = {
   name: "fvsoft1963",
   nom_entreprise: {
